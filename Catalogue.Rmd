@@ -1,0 +1,32 @@
+---
+title: "Catalogue of the Art Exhibit at the Metropolitan Fair"
+author: "Leanne Fortney"
+date: "March 21, 2017"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(ggraph)
+catalogue <- read_csv("~/Desktop/School/Clio2/Catalogue/Metropolitan_Fair.csv", col_types =  cols(
+  Date=col_date(),
+  Painting_num=col_integer(),
+  School_Subject=col_character(), 
+  Artist=col_character(), 
+  Artist_School=col_character(), 
+  Purchaser=col_character(),
+  Price=col_integer()
+))
+
+str(parse_date("Date", format = "", na = c("", "NA"), locale = default_locale()))
+
+col_date(format = "1863")
+
+```
+
+```{r}
+catalogue %>% 
+select(Artist, Artist_School, Price) %>%
+    group_by(Artist, Artist_School)
+
+```
