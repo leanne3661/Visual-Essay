@@ -4,7 +4,7 @@ author: "Leanne Fortney"
 date: "March 21, 2017"
 output: html_document
 ---
-```{r echo=FALSE} 
+```{r, echo=FALSE, include=FALSE}
 
 library(tidyverse)
 library(ggraph)
@@ -16,7 +16,7 @@ library(gapminder)
 #1863 Worlds Metroplitan Fair 
 ---
 
-```{r echo=FALSE} 
+```{r Catalogue File, echo=FALSE}
 catalogue <- read_csv("~/Desktop/School/Clio2/Catalogue/Metropolitan_Fair.csv", 
   col_types =  cols(
   Date=col_integer(),
@@ -28,24 +28,29 @@ catalogue <- read_csv("~/Desktop/School/Clio2/Catalogue/Metropolitan_Fair.csv",
   Price=col_integer()
 ))
 ```
-```{r}  
+```{r Range of Artist Sales Price, include=FALSE}
 catalogue %>%
   group_by(Artist, Artist_School) %>% 
       summarise(avg = mean(Price))
-ggplot(catalogue, aes(x=Artist_School, y=Price))  +
+range_of_artist <- ggplot(catalogue, aes(x=Artist_School, y=Price))  +
   geom_boxplot(fill="#9476AB", color="black") +
    labs(title = "Range of Artist Sales Price per Artist School",
        x = "Artist School",
        y = "Price")
 ```
-```{r, include=TRUE}  
+```{r echo=FALSE, echo=FALSE}
+plot(range_of_artist)
+```
+```{r,  include=FALSE}  
 catalogue %>% 
-select(Artist_School, Artist, Price) %>% 
-  filter(Artist_School == "English") 
-ggplot(data = catalogue) + 
+select(Artist_School, Artist, Price)
+Art_Work_Price <- ggplot(data = catalogue) + 
   geom_point(mapping = aes(x=Price, y=Artist, color=Artist_School)) +
        labs(title = "Art Work Price per Artist",
        x = "Price",
        y = "Artist",
        color = "Artist School")
+```
+```{r Art_Work_Price, echo=FALSE}
+plot(Art_Work_Price)
 ```
