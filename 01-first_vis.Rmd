@@ -1,30 +1,51 @@
 ---
-title: "First Exploration"
+title: "Catalogue of the Art Exhibit at the Metropolitan Fair"
 author: "Leanne Fortney"
-date: "March 20, 2017"
+date: "March 21, 2017"
 output: html_document
 ---
+```{r echo=FALSE} 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggraph)
+library(ggplot2)
+library(dplyr)
+library(gapminder)
 ```
+----
+#1863 Worlds Metroplitan Fair 
+---
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(mtcars)
+```{r echo=FALSE} 
+catalogue <- read_csv("~/Desktop/School/Clio2/Catalogue/Metropolitan_Fair.csv", 
+  col_types =  cols(
+  Date=col_integer(),
+  Painting_num=col_integer(),
+  School_Subject=col_character(), 
+  Artist=col_character(), 
+  Artist_School=col_character(), 
+  Purchaser=col_character(),
+  Price=col_integer()
+))
 ```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(mtcars)
+```{r}  
+catalogue %>%
+  group_by(Artist, Artist_School) %>% 
+      summarise(avg = mean(Price))
+ggplot(catalogue, aes(x=Artist_School, y=Price))  +
+  geom_boxplot(fill="#9476AB", color="black") +
+   labs(title = "Range of Artist Sales Price per Artist School",
+       x = "Artist School",
+       y = "Price")
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r, include=TRUE}  
+catalogue %>% 
+select(Artist_School, Artist, Price) %>% 
+  filter(Artist_School == "English") 
+ggplot(data = catalogue) + 
+  geom_point(mapping = aes(x=Price, y=Artist, color=Artist_School)) +
+       labs(title = "Art Work Price per Artist",
+       x = "Price",
+       y = "Artist",
+       color = "Artist School")
+```
