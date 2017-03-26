@@ -44,6 +44,7 @@ plot(range_of_artist)
 ```{r,  include=FALSE}  
 catalogue %>% 
 select(Artist_School, Artist, Price)
+arrange(catalogue, desc(Artist))
 Art_Work_Price <- ggplot(data = catalogue) + 
   geom_point(mapping = aes(x=Price, y=Artist, color=Artist_School)) +
        labs(title = "Art Work Price per Artist",
