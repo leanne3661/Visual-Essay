@@ -4,16 +4,22 @@ author: "Leanne Fortney"
 date: "March 21, 2017"
 output: html_document
 ---
+```{r echo=FALSE} 
 
-```{r}
 library(tidyverse)
 library(ggraph)
 library(ggplot2)
 library(dplyr)
 library(gapminder)
+```
+----
+#1863 Worlds Metroplitan Fair 
+---
 
-catalogue <- read_csv("~/Desktop/School/Clio2/Catalogue/Metropolitan_Fair.csv", col_types =  cols(
-  Date=col_date(),
+```{r echo=FALSE} 
+catalogue <- read_csv("~/Desktop/School/Clio2/Catalogue/Metropolitan_Fair.csv", 
+  col_types =  cols(
+  Date=col_integer(),
   Painting_num=col_integer(),
   School_Subject=col_character(), 
   Artist=col_character(), 
@@ -21,36 +27,25 @@ catalogue <- read_csv("~/Desktop/School/Clio2/Catalogue/Metropolitan_Fair.csv", 
   Purchaser=col_character(),
   Price=col_integer()
 ))
-
-str(parse_date("Date", format = "", na = c("", "NA"), locale = default_locale()))
-
-col_date(format = "1863")
-
 ```
-
-```{r}
+```{r}  
 catalogue %>%
   group_by(Artist, Artist_School) %>% 
       summarise(avg = mean(Price))
-ggplot(data = catalogue) + 
-  geom_boxplot(
-    mapping = aes(x=Artist_School, y=Price))
-
+ggplot(catalogue, aes(x=Artist_School, y=Price))  +
+  geom_boxplot(fill="#9476AB", color="black") +
+   labs(title = "Range of Artist Sales Price per Artist School",
+       x = "Artist School",
+       y = "Price")
 ```
-
-```{r}
+```{r, include=TRUE}  
 catalogue %>% 
 select(Artist_School, Artist, Price) %>% 
   filter(Artist_School == "English") 
 ggplot(data = catalogue) + 
-  geom_point(mapping = aes(x=Price, y=Artist))
-
-```
-
-```{r}
-catalogue %>% 
-  select(Artist_School, Artist, Price)
-ggplot(data = catalogue) + 
-geom_count(data = catalogue, mapping =aes(x = Price, y=Artist), 
-             geom = "GeomPoint")
+  geom_point(mapping = aes(x=Price, y=Artist, color=Artist_School)) +
+       labs(title = "Art Work Price per Artist",
+       x = "Price",
+       y = "Artist",
+       color = "Artist School")
 ```
