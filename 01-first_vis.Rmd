@@ -1,7 +1,7 @@
 ---
-title: "Catalogue of the Art Exhibit at the Metropolitan Fair"
+title: "1863 Worlds Metroplitan Fair "
 author: "Leanne Fortney"
-date: "March 21, 2017"
+date: "March 27, 2017"
 output: html_document
 ---
 ```{r, echo=FALSE, include=FALSE}
@@ -12,8 +12,6 @@ library(ggplot2)
 library(dplyr)
 library(gapminder)
 ```
-----
-#1863 Worlds Metroplitan Fair 
 ##The auction of John D. Wolfe
 
 In 1861, the federal legislation formed the United States Sanitary Commission (USSC). The USSC was a private relief agency to aid in supporting the U.S., to support sick and wounded soldiers of the U.S. Army during the American Civil War. As part of the efforts, public art exhibitions were held to produce additional support for specific efforts. Though the USSC did not fully support these exuberant events, funds were raised and they helped to unify a sense of nationalism. 
@@ -24,10 +22,8 @@ On December 23, 1863, an auction and exhibition of his collection were presented
 
 <insert/ photo Wolfe.jpg>
 
-The cataloged dataset provides a glimpse into the current market place trends during 1863 despite the war and war efforts. Mr. Wolfe's collection is illustrated in the plot (----) . The visualization displays the overall price range of each school. With this information, we can gather that the ---- School produced more revenue to help towards the war efforts. It also shows how the ------ School was most likely not favorable for collectors during that period. It could have been due to a number of factors such as limited of artwork in the auction or even the declining unity amoungst Americans. 
+The cataloged dataset provides a glimpse into the current market place trends during 1863 despite the war and war efforts. Mr. Wolfe's collection is illustrated in the plot. 
 
-We can take this even further by observing the trends of the collector. We can see the total sum of each collector's purchase and see who spent the most towards purchasing paintings.  
----
 
 ```{r Catalogue File, echo=FALSE}
 catalogue <- read_csv("~/Desktop/School/Clio2/Catalogue/Metropolitan_Fair.csv", 
@@ -54,6 +50,10 @@ range_of_artist <- ggplot(catalogue, aes(x=Artist_School, y=Price))  +
 ```{r echo=FALSE, echo=FALSE}
 plot(range_of_artist)
 ```
+
+The visualization displays the overall price range of each school. With this information, we can gather that the ---- School produced more revenue to help towards the war efforts. It also shows how the ------ School was most likely not favorable for collectors during that period. It could have been due to a number of factors such as limited of artwork in the auction or even the declining unity amoungst Americans. 
+
+
 ```{r,  include=FALSE}  
 catalogue %>% 
 select(Artist_School, Artist, Price)
@@ -68,3 +68,5 @@ Art_Work_Price <- ggplot(data = catalogue) +
 ```{r Artwork_Price_per_Artist, echo=FALSE}
 plot(Art_Work_Price)
 ```
+
+We can take this even further by observing the trends of the collector. We can see the total sum of each collector's purchase and see who spent the most towards purchasing paintings.  
