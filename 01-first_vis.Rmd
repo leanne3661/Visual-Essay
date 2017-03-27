@@ -51,22 +51,23 @@ range_of_artist <- ggplot(catalogue, aes(x=Artist_School, y=Price))  +
 plot(range_of_artist)
 ```
 
-The visualization displays the overall price range of each school. With this information, we can gather that the ---- School produced more revenue to help towards the war efforts. It also shows how the ------ School was most likely not favorable for collectors during that period. It could have been due to a number of factors such as limited of artwork in the auction or even the declining unity amoungst Americans. 
+The visualization displays the overall price range of each school. With this information, we can gather that the Flemish School produced more revenue to help towards the war efforts. It also shows how the American School was most likely not favorable for collectors during that period. It could have been due to a number of factors such as limited of artwork in the auction or even the declining unity amoungst Americans. 
 
 
-```{r,  include=FALSE}  
+```{r Flemish School Artwork, echo=FALSE}
 catalogue %>% 
-select(Artist_School, Artist, Price)
-arrange(catalogue, desc(Artist))
-Art_Work_Price <- ggplot(data = catalogue) + 
-  geom_point(mapping = aes(x=Price, y=Artist, color=Artist_School)) +
-       labs(title = "Artwork Price per Artist",
-       x = "Price",
-       y = "Artist",
-       color = "Artist School")
-```
-```{r Artwork_Price_per_Artist, echo=FALSE}
-plot(Art_Work_Price)
+select(Price, Artist_School, Artist) %>% 
+group_by(Artist_School, Artist) %>% 
+ filter(Artist_School=="Flemish") %>% 
+  ggplot(aes(x = Price, y = Artist)) +
+  geom_count(fill="#9476AB", color="#9476AB") +
+  labs(title = "Flemish Art Sales",
+       x = "Artists",
+       y = "Price")
+  
 ```
 
-We can take this even further by observing the trends of the collector. We can see the total sum of each collector's purchase and see who spent the most towards purchasing paintings.  
+
+We can take this even further by observing the trends of which artists were more sought after and even who had duplicate purchases. We can see that the Flemish School still produced artwork at a lower rate (i.e. under $1,000) with the majority of the artwork being purchased between $1,000 and $4,000. 
+
+Overall both of these visualisations provide historians with a more detailed analaysis of the data presented. It records the trends and is suuported by the war time realities. The art fairs were meant to draw patrons to purchase towards a great cause, but despite the desire to unify the American population, it is obvious that they wanted to be reminded of something else, something that wasn't American.
