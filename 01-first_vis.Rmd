@@ -14,6 +14,19 @@ library(gapminder)
 ```
 ----
 #1863 Worlds Metroplitan Fair 
+##The auction of John D. Wolfe
+
+In 1861, the federal legislation formed the United States Sanitary Commission (USSC). The USSC was a private relief agency to aid in supporting the U.S., to support sick and wounded soldiers of the U.S. Army during the American Civil War. As part of the efforts, public art exhibitions were held to produce additional support for specific efforts. Though the USSC did not fully support these exuberant events, funds were raised and they helped to unify a sense of nationalism. 
+
+In May 1863, John David Wolfe, one of New York's oldest merchants and the esteemed first President of the American Museum of Natural History passed away. Mr. Wolfe left an estate of $4,000,000.  Mr. Wolfe was a supporter of the arts and, presumingly, the Metropolitan Fair of 1864. 
+
+On December 23, 1863, an auction and exhibition of his collection were presented. The "Private Collection of Original Modern Oil Paintings and Water Color Drawings, Containing Choice Examples by the Most Distinguished Masters of the English, French, German, Flemish, and American Schools, Exhibited for the Benefit of the Woman's Hospital and Child's Nursery. 
+
+<insert/ photo Wolfe.jpg>
+
+The cataloged dataset provides a glimpse into the current market place trends during 1863 despite the war and war efforts. Mr. Wolfe's collection is illustrated in the plot (----) . The visualization displays the overall price range of each school. With this information, we can gather that the ---- School produced more revenue to help towards the war efforts. It also shows how the ------ School was most likely not favorable for collectors during that period. It could have been due to a number of factors such as limited of artwork in the auction or even the declining unity amoungst Americans. 
+
+We can take this even further by observing the trends of the collector. We can see the total sum of each collector's purchase and see who spent the most towards purchasing paintings.  
 ---
 
 ```{r Catalogue File, echo=FALSE}
@@ -47,11 +60,11 @@ select(Artist_School, Artist, Price)
 arrange(catalogue, desc(Artist))
 Art_Work_Price <- ggplot(data = catalogue) + 
   geom_point(mapping = aes(x=Price, y=Artist, color=Artist_School)) +
-       labs(title = "Art Work Price per Artist",
+       labs(title = "Artwork Price per Artist",
        x = "Price",
        y = "Artist",
        color = "Artist School")
 ```
-```{r Art_Work_Price, echo=FALSE}
+```{r Artwork_Price_per_Artist, echo=FALSE}
 plot(Art_Work_Price)
 ```
