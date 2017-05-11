@@ -62,8 +62,8 @@ group_by(Artist_School, Artist) %>%
   ggplot(aes(x = Price, y = Artist)) +
   geom_count(fill="#9476AB", color="#9476AB") +
   labs(title = "Flemish Art Sales",
-       x = "Artists",
-       y = "Price")
+       x = "Price",
+       y = "Artist")
   
 ```
 
